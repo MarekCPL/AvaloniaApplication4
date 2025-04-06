@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avaloniasp="using:ScottPlot.Avalonia"
+        x:Class="AvaloniaApplication4.Views.MainWindow"
+        Title="Generator Sinusoidy"
+        Width="900" Height="600"
+        Background="#F5FBFF">
+
+	<StackPanel Margin="20" Spacing="20">
+
+		<!-- Górny pasek z kontrolkami -->
+		<StackPanel Orientation="Horizontal" Spacing="30" VerticalAlignment="Top">
+
+			<!-- Amplituda -->
+			<StackPanel Width="200">
+				<TextBlock Text="AMPLITUDA" FontWeight="Bold"/>
+				<Slider x:Name="AmplitudeSlider" Minimum="0.1" Maximum="5" Value="1"/>
+				<TextBlock Text="{Binding #AmplitudeSlider.Value, StringFormat='{}{0:F1} jednostek'}"/>
+			</StackPanel>
+
+			<!-- Częstotliwość -->
+			<StackPanel Width="200">
+				<TextBlock Text="CZĘSTOTLIWOŚĆ" FontWeight="Bold"/>
+				<Slider x:Name="FrequencySlider" Minimum="0.1" Maximum="5" Value="1"/>
+				<TextBlock Text="{Binding #FrequencySlider.Value, StringFormat='{}{0:F1} Hz'}"/>
+			</StackPanel>
+
+			<!-- Typ fali + Przycisk odtwarzania -->
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Top" Spacing="10" Margin="0,23,0,0">
+				<ComboBox x:Name="WaveformSelector" Width="130" SelectedIndex="0">
+					<ComboBoxItem Content="Sinusoidalna"/>
+					<ComboBoxItem Content="Trójkątna"/>
+					<ComboBoxItem Content="Prostokątna"/>
+				</ComboBox>
+
+				<Button Content="▶ Odtwórz" Width="100" Click="OnPlaySoundClick"/>
+			</StackPanel>
+		</StackPanel>
+
+		<!-- Wykres -->
+		<avaloniasp:AvaPlot x:Name="PlotControl" Height="400" Margin="0,10,0,0"/>
+
+	</StackPanel>
+</Window>
